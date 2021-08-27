@@ -1,10 +1,11 @@
 package com.company.tests;
 
-import com.company.ai.AI;
+import com.company.Move;
+import com.company.ai.VictoryInOneMoveInVerticals;
 
 public class TestVictoryInOneMoveInVerticals {
     int countTests = 1;
-    AI AI = new AI();
+    VictoryInOneMoveInVerticals victoryInOneMoveInVerticals = new VictoryInOneMoveInVerticals();
     
     /*
         0;0 | 0;1 | 0;2
@@ -13,7 +14,7 @@ public class TestVictoryInOneMoveInVerticals {
         ---------------
         2;0 | 2;1 | 2;2
      */
-/*
+
     public static void main(String[] args) {
         TestVictoryInOneMoveInVerticals testVictoryInOneMoveInVerticals = new TestVictoryInOneMoveInVerticals();
         testVictoryInOneMoveInVerticals.test1();
@@ -31,7 +32,7 @@ public class TestVictoryInOneMoveInVerticals {
 
     private void test1() {
         char[][] strings = {{'-', '-', '-'},{'-', '-','-'},{'-', '-', '-'}};
-        Move realResult = AI.victoryInOneMoveInVerticals(strings, 'X');
+        Move realResult = victoryInOneMoveInVerticals.execute(strings, 'X');
         Move expectedResult = new Move(-1, -1);
         if(checkMove(realResult, expectedResult)) {
             System.out.println("Test " + countTests + " OK");
@@ -44,7 +45,7 @@ public class TestVictoryInOneMoveInVerticals {
 
     private void test2() {
         char[][] strings = {{'X', '-', '-'},{'-', '-','X'},{'-', 'X', '-'}};
-        Move realResult = AI.victoryInOneMoveInVerticals(strings, 'X');
+        Move realResult = victoryInOneMoveInVerticals.execute(strings, 'X');
         Move expectedResult = new Move(-1, -1);
         if(checkMove(realResult, expectedResult)) {
             System.out.println("Test " + countTests + " OK");
@@ -57,7 +58,7 @@ public class TestVictoryInOneMoveInVerticals {
 
     private void test3() {
         char[][] strings = {{'-', '-', '-'},{'X', '-','-'},{'X', '-', '-'}};
-        Move realResult = AI.victoryInOneMoveInVerticals(strings, 'X');
+        Move realResult = victoryInOneMoveInVerticals.execute(strings, 'X');
         Move expectedResult = new Move(0, 0);
         if(checkMove(realResult, expectedResult)) {
             System.out.println("Test " + countTests + " OK");
@@ -70,7 +71,7 @@ public class TestVictoryInOneMoveInVerticals {
 
     private void test4() {
         char[][] strings = {{'X', '-', '-'},{'-', '-','X'},{'X', 'X', '-'}};
-        Move realResult = AI.victoryInOneMoveInVerticals(strings, 'X');
+        Move realResult = victoryInOneMoveInVerticals.execute(strings, 'X');
         Move expectedResult = new Move(1, 0);
         if(checkMove(realResult, expectedResult)) {
             System.out.println("Test " + countTests + " OK");
@@ -83,7 +84,7 @@ public class TestVictoryInOneMoveInVerticals {
 
     private void test5() {
         char[][] strings = {{'X', '-', '-'},{'X', '-','X'},{'-', 'X', '-'}};
-        Move realResult = AI.victoryInOneMoveInVerticals(strings, 'X');
+        Move realResult = victoryInOneMoveInVerticals.execute(strings, 'X');
         Move expectedResult = new Move(2, 0);
         if(checkMove(realResult, expectedResult)) {
             System.out.println("Test " + countTests + " OK");
@@ -96,7 +97,7 @@ public class TestVictoryInOneMoveInVerticals {
 
     private void test6() {
         char[][] strings = {{'-', '-', '-'},{'-', 'X','X'},{'-', 'X', '-'}};
-        Move realResult = AI.victoryInOneMoveInVerticals(strings, 'X');
+        Move realResult = victoryInOneMoveInVerticals.execute(strings, 'X');
         Move expectedResult = new Move(0, 1);
         if(checkMove(realResult, expectedResult)) {
             System.out.println("Test " + countTests + " OK");
@@ -109,7 +110,7 @@ public class TestVictoryInOneMoveInVerticals {
 
     private void test7() {
         char[][] strings = {{'-', 'X', '-'},{'X', '-','X'},{'-', 'X', '-'}};
-        Move realResult = AI.victoryInOneMoveInVerticals(strings, 'X');
+        Move realResult = victoryInOneMoveInVerticals.execute(strings, 'X');
         Move expectedResult = new Move(1, 1);
         if(checkMove(realResult, expectedResult)) {
             System.out.println("Test " + countTests + " OK");
@@ -122,7 +123,7 @@ public class TestVictoryInOneMoveInVerticals {
 
     private void test8() {
         char[][] strings = {{'X', 'X', '-'},{'-', 'X','-'},{'-', '-', '-'}};
-        Move realResult = AI.victoryInOneMoveInVerticals(strings, 'X');
+        Move realResult = victoryInOneMoveInVerticals.execute(strings, 'X');
         Move expectedResult = new Move(2, 1);
         if(checkMove(realResult, expectedResult)) {
             System.out.println("Test " + countTests + " OK");
@@ -135,7 +136,7 @@ public class TestVictoryInOneMoveInVerticals {
 
     private void test9() {
         char[][] strings = {{'X', '-', '-'},{'-', '-','X'},{'-', 'X', 'X'}};
-        Move realResult = AI.victoryInOneMoveInVerticals(strings, 'X');
+        Move realResult = victoryInOneMoveInVerticals.execute(strings, 'X');
         Move expectedResult = new Move(0, 2);
         if(checkMove(realResult, expectedResult)) {
             System.out.println("Test " + countTests + " OK");
@@ -148,7 +149,7 @@ public class TestVictoryInOneMoveInVerticals {
 
     private void test10() {
         char[][] strings = {{'X', '-', 'X'},{'-', '-','-'},{'-', '-', 'X'}};
-        Move realResult = AI.victoryInOneMoveInVerticals(strings, 'X');
+        Move realResult = victoryInOneMoveInVerticals.execute(strings, 'X');
         Move expectedResult = new Move(1, 2);
         if(checkMove(realResult, expectedResult)) {
             System.out.println("Test " + countTests + " OK");
@@ -161,7 +162,7 @@ public class TestVictoryInOneMoveInVerticals {
 
     private void test11() {
         char[][] strings = {{'-', '-', 'X'},{'-', '-','X'},{'-', 'X', '-'}};
-        Move realResult = AI.victoryInOneMoveInVerticals(strings, 'X');
+        Move realResult = victoryInOneMoveInVerticals.execute(strings, 'X');
         Move expectedResult = new Move(2, 2);
         if(checkMove(realResult, expectedResult)) {
             System.out.println("Test " + countTests + " OK");
@@ -174,5 +175,5 @@ public class TestVictoryInOneMoveInVerticals {
 
     public boolean checkMove(Move realResult, Move expectedResult) {
         return realResult.equals(expectedResult);
-    }*/
+    }
 }

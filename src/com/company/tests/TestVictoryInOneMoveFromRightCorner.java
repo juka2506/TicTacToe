@@ -1,10 +1,11 @@
 package com.company.tests;
 
-import com.company.ai.AI;
+import com.company.Move;
+import com.company.ai.VictoryInOneMoveFromRightCorner;
 
 public class TestVictoryInOneMoveFromRightCorner {
    int countTests = 1;
-    AI AI = new AI();
+    VictoryInOneMoveFromRightCorner victoryInOneMoveFromRightCorner = new VictoryInOneMoveFromRightCorner();
 
     /*
         0;0 | 0;1 | 0;2
@@ -13,7 +14,7 @@ public class TestVictoryInOneMoveFromRightCorner {
         ---------------
         2;0 | 2;1 | 2;2
      */
-/*
+
     public static void main(String[] args) {
         TestVictoryInOneMoveFromRightCorner testVictoryInOneMoveFromRightCorner = new TestVictoryInOneMoveFromRightCorner();
         testVictoryInOneMoveFromRightCorner.test1();
@@ -25,7 +26,7 @@ public class TestVictoryInOneMoveFromRightCorner {
 
     private void test1() {
         char[][] strings = {{'-', '-', '-'},{'-', '-','-'},{'-', '-', '-'}};
-        Move realResult = AI.victoryInOneMoveFromRightCorner(strings, 'X');
+        Move realResult = victoryInOneMoveFromRightCorner.execute(strings, 'X');
         Move expectedResult = new Move(-1, -1);
         if(checkMove(realResult, expectedResult)) {
             System.out.println("Test " + countTests + " OK");
@@ -38,7 +39,7 @@ public class TestVictoryInOneMoveFromRightCorner {
 
     private void test2() {
         char[][] strings = {{'X', '-', '-'},{'-', '-','X'},{'-', 'X', '-'}};
-        Move realResult = AI.victoryInOneMoveFromRightCorner(strings, 'X');
+        Move realResult = victoryInOneMoveFromRightCorner.execute(strings, 'X');
         Move expectedResult = new Move(-1, -1);
         if(checkMove(realResult, expectedResult)) {
             System.out.println("Test " + countTests + " OK");
@@ -51,7 +52,7 @@ public class TestVictoryInOneMoveFromRightCorner {
 
     private void test3() {
         char[][] strings = {{'-', '-', '-'},{'-', 'X','-'},{'X', '-', '-'}};
-        Move realResult = AI.victoryInOneMoveFromRightCorner(strings, 'X');
+        Move realResult = victoryInOneMoveFromRightCorner.execute(strings, 'X');
         Move expectedResult = new Move(0, 2);
         if(checkMove(realResult, expectedResult)) {
             System.out.println("Test " + countTests + " OK");
@@ -64,7 +65,7 @@ public class TestVictoryInOneMoveFromRightCorner {
 
     private void test4() {
         char[][] strings = {{'-', '-', 'X'},{'-', '-','-'},{'X', '-', 'X'}};
-        Move realResult = AI.victoryInOneMoveFromRightCorner(strings, 'X');
+        Move realResult = victoryInOneMoveFromRightCorner.execute(strings, 'X');
         Move expectedResult = new Move(1, 1);
         if(checkMove(realResult, expectedResult)) {
             System.out.println("Test " + countTests + " OK");
@@ -77,7 +78,7 @@ public class TestVictoryInOneMoveFromRightCorner {
 
     private void test5() {
         char[][] strings = {{'-', '-', 'X'},{'-', 'X','-'},{'-', 'X', '-'}};
-        Move realResult = AI.victoryInOneMoveFromRightCorner(strings, 'X');
+        Move realResult = victoryInOneMoveFromRightCorner.execute(strings, 'X');
         Move expectedResult = new Move(2, 0);
         if(checkMove(realResult, expectedResult)) {
             System.out.println("Test " + countTests + " OK");
@@ -90,5 +91,5 @@ public class TestVictoryInOneMoveFromRightCorner {
 
     public boolean checkMove(Move realResult, Move expectedResult) {
         return realResult.equals(expectedResult);
-    }*/
+    }
 }

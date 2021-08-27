@@ -71,8 +71,8 @@ public class TicTacToe {
         char[][] field = fieldService.createField();
         AI ai = new AI();
         Result result = new Result();
+        fieldService.printFieldToConsole(field);
         while (true) {
-            fieldService.printFieldToConsole(field);
             Move move0 = getNextMove();
             field[move0.getX()][move0.getY()] = 'X';
             fieldService.printFieldToConsole(field);
@@ -111,8 +111,8 @@ public class TicTacToe {
         char[][] field = fieldService.createField();
         AI ai = new AI();
         Result result = new Result();
+        fieldService.printFieldToConsole(field);
         while (true) {
-            fieldService.printFieldToConsole(field);
             Move move0 = getNextMove();
             field[move0.getX()][move0.getY()] = 'X';
             fieldService.printFieldToConsole(field);
@@ -150,8 +150,8 @@ public class TicTacToe {
         FieldService fieldService = new FieldService();
         char[][] field = fieldService.createField();
         Result result = new Result();
+        fieldService.printFieldToConsole(field);
         while (true) {
-            fieldService.printFieldToConsole(field);
             Move move0 = getNextMove();
             field[move0.getX()][move0.getY()] = 'X';
             fieldService.printFieldToConsole(field);
@@ -167,7 +167,7 @@ public class TicTacToe {
                 end();
                 break;
             }
-            fieldService.printFieldToConsole(field);
+
             Move move1 = getNextMove();
             field[move1.getX()][move1.getY()] = '0';
             fieldService.printFieldToConsole(field);
