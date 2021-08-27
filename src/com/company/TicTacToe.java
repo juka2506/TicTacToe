@@ -17,6 +17,9 @@ public class TicTacToe {
 
     private int scoreForXPlayer;
     private int scoreFor0Player;
+    private char player;
+    private char opponent;
+
 
     public static void main(String[] args) {
         TicTacToe game = new TicTacToe();
@@ -25,6 +28,7 @@ public class TicTacToe {
 
     private void play() {
         Scanner scanner = new Scanner(System.in);
+        System.out.println("--=Welcome to TIC-TAC-TOE=--");
         System.out.println("Game menu: ");
         System.out.println("Press 1 if you would like to play with computer.");
         System.out.println("Press 2 if you would like to play with your friend.");
@@ -53,7 +57,6 @@ public class TicTacToe {
 
     private void computerMenu() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println();
         System.out.println("Difficulty menu: ");
         System.out.println("Press 1 for beginner level.");
         System.out.println("Press 2 for advanced level.");
@@ -67,86 +70,156 @@ public class TicTacToe {
     }
 
     private void playWithComputerBeginnerLevel() {
+        chooseYourSign();
         FieldService fieldService = new FieldService();
         char[][] field = fieldService.createField();
         AI ai = new AI();
         Result result = new Result();
         fieldService.printFieldToConsole(field);
         while (true) {
-            Move move0 = getNextMove();
-            field[move0.getX()][move0.getY()] = 'X';
-            fieldService.printFieldToConsole(field);
-            if (result.isWinPosition(field, 'X')) {
-                System.out.println("Player X WIN!");
-                scoreForXPlayer++;
-                System.out.println("Player X " + scoreForXPlayer + " - " + scoreFor0Player + " Player Y");
-                end();
-                break;
-            }
-            if (result.isDraw(field)) {
-                System.out.println("DRAW!");
-                end();
-                break;
+            if(player =='X') {
+                Move move0 = getNextMove();
+                field[move0.getX()][move0.getY()] = 'X';
+                fieldService.printFieldToConsole(field);
+                if (result.isWinPosition(field, 'X')) {
+                    System.out.println("Player X WIN!");
+                    scoreForXPlayer++;
+                    System.out.println("Player X " + scoreForXPlayer + " - " + scoreFor0Player + " Player Y");
+                    end();
+                    break;
+                }
+                if (result.isDraw(field)) {
+                    System.out.println("DRAW!");
+                    end();
+                    break;
+                }
+
+                ai.makeNextBeginnerAIMove(field, '0');
+                fieldService.printFieldToConsole(field);
+                if (result.isWinPosition(field, '0')) {
+                    System.out.println("Player 0 WIN!");
+                    scoreFor0Player++;
+                    System.out.println("Player X " + scoreForXPlayer + " - " + scoreFor0Player + " Player Y");
+                    end();
+                    break;
+                }
+                if (result.isDraw(field)) {
+                    System.out.println("DRAW!");
+                    end();
+                    break;
+                }
+            } else {
+                ai.makeNextBeginnerAIMove(field, 'X');
+                fieldService.printFieldToConsole(field);
+                if (result.isWinPosition(field, 'X')) {
+                    System.out.println("Player X WIN!");
+                    scoreForXPlayer++;
+                    System.out.println("Player X " + scoreForXPlayer + " - " + scoreFor0Player + " Player Y");
+                    end();
+                    break;
+                }
+                if (result.isDraw(field)) {
+                    System.out.println("DRAW!");
+                    end();
+                    break;
+                }
+
+                Move move0 = getNextMove();
+                field[move0.getX()][move0.getY()] = '0';
+                fieldService.printFieldToConsole(field);
+                if (result.isWinPosition(field, '0')) {
+                    System.out.println("Player 0 WIN!");
+                    scoreFor0Player++;
+                    System.out.println("Player X " + scoreForXPlayer + " - " + scoreFor0Player + " Player Y");
+                    end();
+                    break;
+                }
+                if (result.isDraw(field)) {
+                    System.out.println("DRAW!");
+                    end();
+                    break;
+                }
+
             }
 
-            ai.makeNextBeginnerAIMove(field, '0');
-            fieldService.printFieldToConsole(field);
-            if (result.isWinPosition(field, '0')) {
-                System.out.println("Player 0 WIN!");
-                scoreFor0Player++;
-                System.out.println("Player X " + scoreForXPlayer + " - " + scoreFor0Player + " Player Y");
-                end();
-                break;
-            }
-            if (result.isDraw(field)) {
-                System.out.println("DRAW!");
-                end();
-                break;
-            }
         }
     }
 
     private void playWithComputerAdvancedLevel() {
+        chooseYourSign();
         FieldService fieldService = new FieldService();
         char[][] field = fieldService.createField();
         AI ai = new AI();
         Result result = new Result();
         fieldService.printFieldToConsole(field);
         while (true) {
-            Move move0 = getNextMove();
-            field[move0.getX()][move0.getY()] = 'X';
-            fieldService.printFieldToConsole(field);
-            if (result.isWinPosition(field, 'X')) {
-                System.out.println("Player X WIN!");
-                scoreForXPlayer++;
-                System.out.println("Player X " + scoreForXPlayer + " - " + scoreFor0Player + " Player Y");
-                end();
-                break;
-            }
-            if (result.isDraw(field)) {
-                System.out.println("DRAW!");
-                end();
-                break;
-            }
+            if(player == 'X') {
+                Move move0 = getNextMove();
+                field[move0.getX()][move0.getY()] = 'X';
+                fieldService.printFieldToConsole(field);
+                if (result.isWinPosition(field, 'X')) {
+                    System.out.println("Player X WIN!");
+                    scoreForXPlayer++;
+                    System.out.println("Player X " + scoreForXPlayer + " - " + scoreFor0Player + " Player Y");
+                    end();
+                    break;
+                }
+                if (result.isDraw(field)) {
+                    System.out.println("DRAW!");
+                    end();
+                    break;
+                }
 
-            ai.makeNextAdvancedAIMove(field, '0', 'X');
-            fieldService.printFieldToConsole(field);
-            if (result.isWinPosition(field, '0')) {
-                System.out.println("Player 0 WIN!");
-                scoreFor0Player++;
-                System.out.println("Player X " + scoreForXPlayer + " - " + scoreFor0Player + " Player Y");
-                end();
-                break;
-            }
-            if (result.isDraw(field)) {
-                System.out.println("DRAW!");
-                end();
-                break;
+                ai.makeNextAdvancedAIMove(field, '0', 'X');
+                fieldService.printFieldToConsole(field);
+                if (result.isWinPosition(field, '0')) {
+                    System.out.println("Player 0 WIN!");
+                    scoreFor0Player++;
+                    System.out.println("Player X " + scoreForXPlayer + " - " + scoreFor0Player + " Player Y");
+                    end();
+                    break;
+                }
+                if (result.isDraw(field)) {
+                    System.out.println("DRAW!");
+                    end();
+                    break;
+                }
+            } else {
+                ai.makeNextAdvancedAIMove(field, 'X', '0');
+                fieldService.printFieldToConsole(field);
+                if (result.isWinPosition(field, 'X')) {
+                    System.out.println("Player X WIN!");
+                    scoreForXPlayer++;
+                    System.out.println("Player X " + scoreForXPlayer + " - " + scoreFor0Player + " Player Y");
+                    end();
+                    break;
+                }
+                if (result.isDraw(field)) {
+                    System.out.println("DRAW!");
+                    end();
+                    break;
+                }
+                Move move0 = getNextMove();
+                field[move0.getX()][move0.getY()] = '0';
+                fieldService.printFieldToConsole(field);
+                if (result.isWinPosition(field, '0')) {
+                    System.out.println("Player 0 WIN!");
+                    scoreFor0Player++;
+                    System.out.println("Player X " + scoreForXPlayer + " - " + scoreFor0Player + " Player Y");
+                    end();
+                    break;
+                }
+                if (result.isDraw(field)) {
+                    System.out.println("DRAW!");
+                    end();
+                    break;
+                }
             }
         }
     }
 
     private void playWithYourFriend() {
+        chooseYourSign();
         FieldService fieldService = new FieldService();
         char[][] field = fieldService.createField();
         Result result = new Result();
@@ -182,6 +255,32 @@ public class TicTacToe {
                 System.out.println("DRAW!");
                 end();
                 break;
+            }
+        }
+    }
+
+    private void chooseYourSign() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Please choose your sign: ");
+        System.out.println("Press 1 for X");
+        System.out.println("Press 2 for 0");
+        System.out.println("X always goes first");
+        System.out.print("Your choice: ");
+        int userInput = scanner.nextInt();
+        switch (userInput) {
+            case 1 -> {
+                player = 'X';
+                opponent = '0';
+                System.out.println("The choice is made. You play with X.");
+            }
+            case 2 -> {
+                player = '0';
+                opponent = 'X';
+                System.out.println("The choice is made. You play with 0.");
+            }
+            default -> {
+                System.out.println("Invalid input. Please try again.");
+                chooseYourSign();
             }
         }
     }
