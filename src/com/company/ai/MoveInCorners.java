@@ -32,8 +32,10 @@ public class MoveInCorners {
             possibleCornerMoves.add(new Move(x4, y4));
         }
         Random random = new Random();
-        int randomCorner = random.nextInt(possibleCornerMoves.size());
-        move = possibleCornerMoves.get(randomCorner);
+        if(possibleCornerMoves.size() > 0) {
+            int randomCorner = random.nextInt(possibleCornerMoves.size());
+            move = possibleCornerMoves.get(randomCorner);
+        }
         return move;
     }
 

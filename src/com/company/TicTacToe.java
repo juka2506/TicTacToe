@@ -20,7 +20,6 @@ public class TicTacToe {
     private char player;
     private char opponent;
 
-
     public static void main(String[] args) {
         TicTacToe game = new TicTacToe();
         game.play();
@@ -39,6 +38,10 @@ public class TicTacToe {
             case 1 -> computerMenu();
             case 2 -> playWithYourFriend();
             case 3 -> System.exit(0);
+            default -> {
+                System.out.println("Invalid input. Please try again.");
+                play();
+            }
         }
     }
 
@@ -52,6 +55,10 @@ public class TicTacToe {
         switch (userInput) {
             case 1 -> play();
             case 2 -> System.exit(0);
+            default -> {
+                System.out.println("Invalid input. Please try again.");
+                end();
+            }
         }
     }
 
@@ -65,6 +72,10 @@ public class TicTacToe {
         switch (userInput) {
             case 1 -> playWithComputerBeginnerLevel();
             case 2 -> playWithComputerAdvancedLevel();
+            default -> {
+                System.out.println("Invalid input. Please try again.");
+                computerMenu();
+            }
         }
         System.out.println();
     }
@@ -77,9 +88,8 @@ public class TicTacToe {
         Result result = new Result();
         fieldService.printFieldToConsole(field);
         while (true) {
-            if(player =='X') {
-                Move move0 = getNextMove();
-                field[move0.getX()][move0.getY()] = 'X';
+            if (player == 'X') {
+                makeNextMove(field, 'X');
                 fieldService.printFieldToConsole(field);
                 if (result.isWinPosition(field, 'X')) {
                     System.out.println("Player X WIN!");
@@ -124,8 +134,7 @@ public class TicTacToe {
                     break;
                 }
 
-                Move move0 = getNextMove();
-                field[move0.getX()][move0.getY()] = '0';
+                makeNextMove(field, '0');
                 fieldService.printFieldToConsole(field);
                 if (result.isWinPosition(field, '0')) {
                     System.out.println("Player 0 WIN!");
@@ -153,9 +162,8 @@ public class TicTacToe {
         Result result = new Result();
         fieldService.printFieldToConsole(field);
         while (true) {
-            if(player == 'X') {
-                Move move0 = getNextMove();
-                field[move0.getX()][move0.getY()] = 'X';
+            if (player == 'X') {
+                makeNextMove(field, 'X');
                 fieldService.printFieldToConsole(field);
                 if (result.isWinPosition(field, 'X')) {
                     System.out.println("Player X WIN!");
@@ -199,8 +207,7 @@ public class TicTacToe {
                     end();
                     break;
                 }
-                Move move0 = getNextMove();
-                field[move0.getX()][move0.getY()] = '0';
+                makeNextMove(field, '0');
                 fieldService.printFieldToConsole(field);
                 if (result.isWinPosition(field, '0')) {
                     System.out.println("Player 0 WIN!");
@@ -225,8 +232,7 @@ public class TicTacToe {
         Result result = new Result();
         fieldService.printFieldToConsole(field);
         while (true) {
-            Move move0 = getNextMove();
-            field[move0.getX()][move0.getY()] = 'X';
+            makeNextMove(field, 'X');
             fieldService.printFieldToConsole(field);
             if (result.isWinPosition(field, 'X')) {
                 System.out.println("Player X WIN!");
@@ -241,8 +247,7 @@ public class TicTacToe {
                 break;
             }
 
-            Move move1 = getNextMove();
-            field[move1.getX()][move1.getY()] = '0';
+            makeNextMove(field, '0');
             fieldService.printFieldToConsole(field);
             if (result.isWinPosition(field, '0')) {
                 System.out.println("Player 0 WIN!");
@@ -285,15 +290,58 @@ public class TicTacToe {
         }
     }
 
-    private Move getNextMove() {
+    private void makeNextMove(char[][] field, char player) {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Please enter row (1-3) for your next move: ");//// запросите у пользователя с консоли две координаты
         int x = (scanner.nextInt() - 1);
         System.out.print("Please enter column (1-3) for your next move: ");
         int y = (scanner.nextInt() - 1);
-        Move move = new Move(x, y);
-        return move;
+        if (userInputValidation(x, y)
+                && isChosenCellFree(field, x, y)) {
+            field[x][y] = player;
+        } else {
+            makeNextMove(field, player);
+        }
     }
 
+    private boolean userInputValidation(int x, int y) {
+        if (x >= 0 && x <= 2
+                && y >= 0 && y <= 2) {
+            return true;
+        } else {
+            System.out.println("You have entered incorrect data. Try again.");
+            return false;
+        }
+    }
+
+    private boolean isChosenCellFree(char[][] field, int x, int y) {
+        if (field[x][y] == '-') {
+            return true;
+        } else {
+            System.out.println("The chosen cell is already occupied. Please try again.");
+            return false;
+        }
+    }
+
+    private boolean isGameOver(char[][] field, char playerToCheck) {
+        Result result = new Result();
+        if (result.isWinPosition(field, playerToCheck)) {
+            System.out.println("PLAYER " + playerToCheck + " WINS! CONGRATULATIONS!");
+            if (playerToCheck == 'X') {
+                scoreForXPlayer++;
+            } else {
+                scoreFor0Player++;
+            }
+            System.out.println("Player X " + scoreForXPlayer + " - " + scoreFor0Player + " Player Y");
+            end();
+            return true;
+        }
+        else if (result.isDraw(field)) {
+            System.out.println("DRAW!");
+            end();
+            return true;
+        }
+        return false;
+    }
 }
 
