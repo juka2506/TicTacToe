@@ -18,10 +18,10 @@ public class Result {
     }
 
     public boolean isDraw(char[][] field) {
-        return !isWin(field) && !isEmptySpot(field);
+        return !isWin(field) && !isEmptyCell(field);
     }
 
-    public boolean isEmptySpot(char[][] field) {
+    public boolean isEmptyCell(char[][] field) {
         char emptyToCheck = '-';
         for (char[] ints : field) {
             for (char anInt : ints) {
