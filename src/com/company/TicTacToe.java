@@ -94,10 +94,6 @@ public class TicTacToe {
                 }
 
                 ai.makeNextBeginnerAIMove(field, '0');
-                fieldService.printFieldToConsole(field);
-                if(isGameOver(field, '0')){
-                    break;
-                }
             } else {
                 ai.makeNextBeginnerAIMove(field, 'X');
                 fieldService.printFieldToConsole(field);
@@ -106,10 +102,10 @@ public class TicTacToe {
                 }
 
                 makeNextMove(field, '0');
-                fieldService.printFieldToConsole(field);
-                if(isGameOver(field, '0')){
-                    break;
-                }
+            }
+            fieldService.printFieldToConsole(field);
+            if(isGameOver(field, '0')){
+                break;
             }
         }
     }
@@ -129,10 +125,6 @@ public class TicTacToe {
                 }
 
                 ai.makeNextAdvancedAIMove(field, '0', 'X');
-                fieldService.printFieldToConsole(field);
-                if(isGameOver(field, '0')){
-                    break;
-                }
             } else {
                 ai.makeNextAdvancedAIMove(field, 'X', '0');
                 fieldService.printFieldToConsole(field);
@@ -140,10 +132,10 @@ public class TicTacToe {
                     break;
                 }
                 makeNextMove(field, '0');
-                fieldService.printFieldToConsole(field);
-                if(isGameOver(field, '0')){
-                    break;
-                }
+            }
+            fieldService.printFieldToConsole(field);
+            if(isGameOver(field, '0')){
+                break;
             }
         }
     }
@@ -223,6 +215,7 @@ public class TicTacToe {
         }
         if (result.isDraw(field)) {
             System.out.println("DRAW!");
+            System.out.println("Player X " + scoreForXPlayer + " - " + scoreFor0Player + " Player Y");
             end();
             return true;
         }
