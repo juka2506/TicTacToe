@@ -19,5 +19,6 @@ public class FieldService {
         System.out.println(field[1][0] + " | " + field[1][1] + " | " + field[1][2]);
         System.out.println("---------");
         System.out.println(field[2][0] + " | " + field[2][1] + " | " + field[2][2]);
+        System.out.println("\n");
     }
 }

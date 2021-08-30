@@ -87,21 +87,29 @@ public class TicTacToe {
         fieldService.printFieldToConsole(field);
         while (true) {
             if (player == 'X') {
-                makeNextMove(field, 'X');
+                if (!ai.wasAutoLastMoveMade(field, 'X')) {
+                    makeNextMove(field, 'X');
+                }
                 fieldService.printFieldToConsole(field);
                 if(isGameOver(field, 'X')){
                     break;
                 }
 
-                ai.makeNextBeginnerAIMove(field, '0');
+                if (!ai.wasAutoLastMoveMade(field, '0')) {
+                    ai.makeNextBeginnerAIMove(field, '0');
+                }
             } else {
-                ai.makeNextBeginnerAIMove(field, 'X');
+                if (!ai.wasAutoLastMoveMade(field, 'X')) {
+                    ai.makeNextBeginnerAIMove(field, 'X');
+                }
                 fieldService.printFieldToConsole(field);
                 if(isGameOver(field, 'X')){
                     break;
                 }
 
-                makeNextMove(field, '0');
+                if (!ai.wasAutoLastMoveMade(field, '0')) {
+                    makeNextMove(field, '0');
+                }
             }
             fieldService.printFieldToConsole(field);
             if(isGameOver(field, '0')){
@@ -118,20 +126,28 @@ public class TicTacToe {
         fieldService.printFieldToConsole(field);
         while (true) {
             if (player == 'X') {
-                makeNextMove(field, 'X');
+                if (!ai.wasAutoLastMoveMade(field, 'X')) {
+                    makeNextMove(field, 'X');
+                }
                 fieldService.printFieldToConsole(field);
                 if(isGameOver(field, 'X')){
                     break;
                 }
 
-                ai.makeNextAdvancedAIMove(field, '0', 'X');
+                if (!ai.wasAutoLastMoveMade(field, '0')) {
+                    ai.makeNextAdvancedAIMove(field, '0', 'X');
+                }
             } else {
-                ai.makeNextAdvancedAIMove(field, 'X', '0');
+                if (!ai.wasAutoLastMoveMade(field, 'X')) {
+                    ai.makeNextAdvancedAIMove(field, 'X', '0');
+                }
                 fieldService.printFieldToConsole(field);
                 if(isGameOver(field, 'X')){
                     break;
                 }
-                makeNextMove(field, '0');
+                if (!ai.wasAutoLastMoveMade(field, '0')) {
+                    makeNextMove(field, '0');
+                }
             }
             fieldService.printFieldToConsole(field);
             if(isGameOver(field, '0')){
@@ -144,15 +160,20 @@ public class TicTacToe {
         chooseYourSign();
         FieldService fieldService = new FieldService();
         char[][] field = fieldService.createField();
+        AI ai = new AI();
         fieldService.printFieldToConsole(field);
         while (true) {
-            makeNextMove(field, 'X');
+            if (!ai.wasAutoLastMoveMade(field, 'X')) {
+                makeNextMove(field, 'X');
+            }
             fieldService.printFieldToConsole(field);
             if(isGameOver(field, 'X')){
                 break;
             }
 
-            makeNextMove(field, '0');
+            if (!ai.wasAutoLastMoveMade(field, '0')) {
+                makeNextMove(field, '0');
+            }
             fieldService.printFieldToConsole(field);
             if(isGameOver(field, '0')){
                 break;

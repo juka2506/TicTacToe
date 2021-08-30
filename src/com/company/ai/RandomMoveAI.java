@@ -11,6 +11,7 @@ public class RandomMoveAI {
             Move move1 = getNextRandomMove();
             if (field[move1.getX()][move1.getY()] == ('-')) {
                 field[move1.getX()][move1.getY()] = player;
+                System.out.println("Computer have made move on " + (move1.getX()+1) + " row and " + (move1.getY()+1) + " column.");
                 break;
             }
         }
