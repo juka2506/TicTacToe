@@ -210,7 +210,8 @@ public class TicTacToe {
     private void makeNextMove(char[][] field, char player) {
         UserInputValidation userInputValidation = new UserInputValidation();
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Please enter row (1-3) for your next move: ");//// запросите у пользователя с консоли две координаты
+        System.out.println("Player " + player + " goes");
+        System.out.print("Please enter row (1-3) for your next move: ");
         int x = (scanner.nextInt() - 1);
         System.out.print("Please enter column (1-3) for your next move: ");
         int y = (scanner.nextInt() - 1);
@@ -230,13 +231,13 @@ public class TicTacToe {
             } else {
                 scoreFor0Player++;
             }
-            System.out.println("Player X " + scoreForXPlayer + " - " + scoreFor0Player + " Player Y");
+            System.out.println("Player X " + scoreForXPlayer + " - " + scoreFor0Player + " Player 0");
             end();
             return true;
         }
         if (result.isDraw(field)) {
             System.out.println("DRAW!");
-            System.out.println("Player X " + scoreForXPlayer + " - " + scoreFor0Player + " Player Y");
+            System.out.println("Player X " + scoreForXPlayer + " - " + scoreFor0Player + " Player 0");
             end();
             return true;
         }

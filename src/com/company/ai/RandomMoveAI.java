@@ -19,7 +19,7 @@ public class RandomMoveAI {
 
     private Move getNextRandomMove() {
         Random random = new Random();
-        int x = random.nextInt(3); //заменили вместо ввода на использование рандомных значений для определения индекса элемента
+        int x = random.nextInt(3);
         int y = random.nextInt(3);
         Move move = new Move(x, y);
         return move;

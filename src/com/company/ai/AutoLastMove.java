@@ -19,9 +19,9 @@ public class AutoLastMove {
 
     private int emptyCells(char[][] field) {
         int countEmpty = 0;
-        for (int i = 0; i < field.length; i++) {
-            for (int j = 0; j < field[i].length; j++) {
-                if(field[i][j] == '-') {
+        for (char[] chars : field) {
+            for (char aChar : chars) {
+                if (aChar == '-') {
                     countEmpty++;
                 }
             }
